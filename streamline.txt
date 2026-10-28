@@ -1,0 +1,44 @@
+
+import streamlit as st
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+
+st.set_page_config(page_title="NSE Stock Analysis", layout="wide")
+
+st.title("NSE Stock Analysis")
+st.write("Analyze Indian stock market prices.")
+
+ticker = st.text_input(
+    "Enter stock symbol",
+    value="RELIANCE.NS"
+)
+
+period = st.selectbox(
+    "Select period",
+    ["1mo", "3mo", "6mo", "1y", "5y"]
+)
+
+if st.button("Analyze Stock"):
+    try:
+        with st.spinner("Fetching stock data..."):
+            stock = yf.Ticker(ticker)
+            data = stock.history(period=period)
+
+        if data.empty:
+            st.error("No stock data found. Check the ticker symbol.")
+        else:
+            st.subheader(f"Stock Price: {ticker}")
+
+            st.metric(
+                "Latest Closing Price",
+                f"₹{data['Close'].iloc[-1]:,.2f}"
+            )
+
+            st.line_chart(data["Close"])
+
+            st.subheader("Recent Stock Data")
+            st.dataframe(data.tail(10))
+
+    except Exception as e:
+        st.error(f"Error fetching stock data: {e}")

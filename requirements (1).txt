@@ -1,5 +1,7 @@
-fastapi
-uvicorn
+streamlit
 yfinance
 pandas
 numpy
+plotly
+requests
+streamlit-autorefresh

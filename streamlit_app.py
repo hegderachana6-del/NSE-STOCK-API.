@@ -543,3 +543,6 @@ with tabs[10]:
                                    "Strategy equity": equity, "Benchmark equity": benchmark, "Drawdown %": drawdown*100})
             st.dataframe(detail.tail(100).round(3), use_container_width=True)
         st.warning("Backtest results are historical simulations, not predictions. They exclude slippage, taxes, liquidity limits, corporate-action complexities and exact brokerage schedules. Long/short mode is simplified and does not model margin or short-selling constraints. Try multiple periods and stocks; avoid selecting a strategy only because it performed well in the past.")
+
+
+
